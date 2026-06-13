@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://p4jwbsoywgtf"]
+
+[ext_resource type="Texture2D" uid="uid://dwxmvaj54ghc2" path="res://materials/tile.png" id="1_gnchi"]
+
+[resource]
+albedo_texture = ExtResource("1_gnchi")
+uv1_scale = Vector3(4, 4, 4)
+texture_filter = 0

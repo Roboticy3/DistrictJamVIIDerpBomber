@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c0wgpjwwyf6a2"]
+
+[ext_resource type="Script" uid="uid://5hnoxb8g76ud" path="res://scripts/settings.gd" id="1_x2hje"]
+[ext_resource type="Script" uid="uid://bs2j1ynckyvjd" path="res://scripts/read_range.gd" id="2_nkug2"]
+
+[node name="Settings" type="CanvasLayer" unique_id=1247447749 node_paths=PackedStringArray("mouse_sensitivity_slider")]
+script = ExtResource("1_x2hje")
+mouse_sensitivity_slider = NodePath("MarginContainer/Panel/MarginContainer/Panel/VBoxContainer/HBoxContainer/HSlider")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1787162501]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=668362378]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel" unique_id=188120837]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer" unique_id=1131273766]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/Panel" unique_id=1136832567]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/Panel/VBoxContainer" unique_id=1340289788]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=570616228]
+layout_mode = 2
+text = "Mouse sensitivity"
+
+[node name="Control" type="Control" parent="MarginContainer/Panel/MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=829985906]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/Panel/MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=564223958 node_paths=PackedStringArray("range")]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+script = ExtResource("2_nkug2")
+range = NodePath("../HSlider")
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=1729456330]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 1.0

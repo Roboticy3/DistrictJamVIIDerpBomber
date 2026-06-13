@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://buiqwbtkalfyl"]
+
+[ext_resource type="Script" uid="uid://du43v7cqin8fv" path="res://scripts/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dnfn58bfe30ti" path="res://scripts/kill_rotation.gd" id="2_onrkg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
+
+[node name="Player" type="Node3D" unique_id=1473064690 node_paths=PackedStringArray("sensor", "body", "garbage")]
+script = ExtResource("1_4flbx")
+sensor = NodePath("Body/RayCast3D")
+body = NodePath("Body")
+garbage = NodePath(".")
+
+[node name="Body" type="RigidBody3D" parent="." unique_id=1893002538]
+gravity_scale = 0.0
+script = ExtResource("2_onrkg")
+
+[node name="Camera3D" type="Camera3D" parent="Body" unique_id=1033686848]
+current = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body" unique_id=37346248]
+shape = SubResource("SphereShape3D_sh265")
+
+[node name="RayCast3D" type="RayCast3D" parent="Body" unique_id=454953933]
+target_position = Vector3(0, 0, -100)
