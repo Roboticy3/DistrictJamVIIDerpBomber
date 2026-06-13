@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c66wismulc6no"]
+
+[ext_resource type="Script" uid="uid://qbdalxcydnr0" path="res://scripts/bomb.gd" id="1_573fp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mbmgk"]
+radius = 0.3
+
+[node name="Bomb" type="Area3D" unique_id=92178738]
+script = ExtResource("1_573fp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1219648181]
+shape = SubResource("SphereShape3D_mbmgk")

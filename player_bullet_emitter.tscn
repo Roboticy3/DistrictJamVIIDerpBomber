@@ -1,17 +1,12 @@
 [gd_scene format=3 uid="uid://c7pd12u5ayc8j"]
 
 [ext_resource type="Script" uid="uid://hych71pkip85" path="res://scripts/player_bullet_emitter.gd" id="1_4y51u"]
-[ext_resource type="ArrayMesh" uid="uid://dt0iccsg5bhrt" path="res://models/Bullet.obj" id="2_5y80w"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_5y80w"]
-radius = 0.025
+[ext_resource type="PackedScene" uid="uid://cvjfxxu8qhkwv" path="res://player_bullet.tscn" id="2_5y80w"]
 
 [node name="PlayerBulletEmitter" type="Node3D" unique_id=919915238 node_paths=PackedStringArray("emitter_timer")]
 script = ExtResource("1_4y51u")
 speed = 25.0
-lifetime = 2.0
-bullet_model = ExtResource("2_5y80w")
-bullet_shape = SubResource("SphereShape3D_5y80w")
+bullet = ExtResource("2_5y80w")
 emitter_timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="." unique_id=710544998]

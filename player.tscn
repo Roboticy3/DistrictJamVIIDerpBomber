@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://buiqwbtkalfyl"]
 
 [ext_resource type="Script" uid="uid://du43v7cqin8fv" path="res://scripts/player_controller.gd" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://dnfn58bfe30ti" path="res://scripts/kill_rotation.gd" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://c7nsa2tsbnx6i" path="res://scripts/character_rigid_body.gd" id="2_2hs0m"]
 [ext_resource type="ArrayMesh" uid="uid://b8i823qxt6ui5" path="res://models/Turret.obj" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://c7pd12u5ayc8j" path="res://player_bullet_emitter.tscn" id="4_hqtel"]
 [ext_resource type="PackedScene" uid="uid://b8h3rbp5x3fxa" path="res://hud_main.tscn" id="5_sweqy"]
@@ -19,10 +19,14 @@ body = NodePath("Body")
 garbage = NodePath(".")
 gun = NodePath("Gun")
 
-[node name="Body" type="RigidBody3D" parent="." unique_id=1893002538]
+[node name="Body" type="RigidBody3D" parent="." unique_id=1893002538 node_paths=PackedStringArray("health")]
+collision_layer = 32
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
 gravity_scale = 0.0
-script = ExtResource("2_onrkg")
+script = ExtResource("2_2hs0m")
+cancel_rotation = true
+health = NodePath("../HudMain/VBoxContainer/HBoxContainer2/Health")
 
 [node name="Camera3D" type="Camera3D" parent="Body" unique_id=1033686848]
 current = true

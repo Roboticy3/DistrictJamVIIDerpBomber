@@ -14,8 +14,11 @@ extends Node
 @export var garbage:Node3D
 @export var gun:Node
 
+@export var body_group := &"player_body"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	body.add_to_group(body_group)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	pass # Replace with function body.
 
@@ -31,7 +34,6 @@ func is_sensor_terrain() -> bool:
 
 func get_forward_vector() -> Vector3:
 	return -get_body_transform().basis.z
-
 
 var desired_mouse_velocity := Vector2.ZERO
 func _input(event:InputEvent):
@@ -60,4 +62,4 @@ func _physics_process(delta: float) -> void:
 		body.rotate(current_up, desired_mouse_velocity.x)
 	current_up = get_body_transform().basis.y
 	body.rotate(get_body_transform().basis.x, desired_mouse_velocity.y)
-	desired_mouse_velocity = Vector2.ZERO
+	desired_mouse_velocity *= 0.6

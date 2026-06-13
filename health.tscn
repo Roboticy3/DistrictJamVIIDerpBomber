@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bnevrkm2dhn1h"]
+
+[node name="Health" type="HSlider" unique_id=93474449]
+visible = false
+offset_right = 8.0
+offset_bottom = 16.0
+max_value = 10.0
+value = 10.0
+editable = false

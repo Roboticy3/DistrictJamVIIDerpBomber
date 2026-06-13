@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cjyxv5b6woyd2"]
+
+[ext_resource type="Script" uid="uid://wpyskp5a3ie4" path="res://scripts/explosion.gd" id="1_q7epf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vxas0"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_q7epf"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7epf"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Explosion" type="Node3D" unique_id=721047995 node_paths=PackedStringArray("area", "timer")]
+script = ExtResource("1_q7epf")
+area = NodePath("Area3D")
+timer = NodePath("Timer")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1045562805]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1812646168]
+shape = SubResource("SphereShape3D_vxas0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" unique_id=1417976396]
+mesh = SubResource("SphereMesh_q7epf")
+surface_material_override/0 = SubResource("StandardMaterial3D_q7epf")
+
+[node name="Timer" type="Timer" parent="." unique_id=2005356644]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="queue_free"]
