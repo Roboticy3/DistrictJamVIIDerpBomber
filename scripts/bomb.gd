@@ -7,6 +7,7 @@ extends Area3D
 @export var sensitive := false
 
 @export var explosion:PackedScene
+@export var body:RigidBody3D
 
 func _ready():
 	if sensitive:
@@ -23,3 +24,4 @@ func explode():
 	instance.set("damage", base_damage)
 	instance.set("collision_mask", explosion_mask)
 	get_tree().root.add_child(instance)
+	body.queue_free()

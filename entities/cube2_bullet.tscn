@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bfnb5gxsm8bbh"]
+
+[ext_resource type="PackedScene" uid="uid://dv3suknc17ibv" path="res://entities/cube_bullet.tscn" id="1_uhq2o"]
+[ext_resource type="PackedScene" uid="uid://by5yr5c88ir5j" path="res://entities/cube2_explosion.tscn" id="2_i86qj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhq2o"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.53333336)
+emission_enabled = true
+emission = Color(0.13750005, 0, 0.75, 1)
+
+[node name="CubeBullet" unique_id=1383950408 instance=ExtResource("1_uhq2o")]
+linear_damp = 0.5
+
+[node name="MeshInstance3D" parent="." index="1" unique_id=139461338]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_uhq2o")
+
+[node name="Bomb" parent="." index="3" unique_id=92178738]
+base_damage = 15.0
+base_radius = 1.7
+explosion = ExtResource("2_i86qj")

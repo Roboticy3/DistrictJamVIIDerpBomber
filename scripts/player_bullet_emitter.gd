@@ -13,8 +13,8 @@ func _ready() -> void:
 
 func _on_bullet_time():
 	
+	#print(self, " shooting bullet")
 	var instance := bullet.instantiate()
-	
 	
 	instance.set("transform", global_transform)
 	

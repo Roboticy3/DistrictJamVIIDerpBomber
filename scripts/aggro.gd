@@ -9,6 +9,8 @@ extends Node
 @export var anger_max := 20.0
 @export var fire_rate_max := 10.0
 
+@export var emitter:Node
+
 var current_target:RigidBody3D
 var anger := 0.0
 
@@ -25,7 +27,7 @@ func _on_process_aggro() -> void:
 			var query := PhysicsRayQueryParameters3D.new()
 			query.from = body.global_position
 			query.to = p.global_position
-			query.collision_mask = 1 | 3 #Terrain and props can block the way
+			query.collision_mask = 1 | 3 | 7 #Terrain, props, and fog can block the way
 			query.exclude = [body, p]
 			
 			var result := state.intersect_ray(query)
@@ -62,7 +64,13 @@ func _physics_process(delta: float) -> void:
 
 func _on_process_fire():
 	#fire the cube's "gun" vaguely in the direction of the player
-	print(self, " is shooting at ", current_target, "!")
+	#print(self, " is shooting at ", current_target, "!")
 	
 	var fire_rate := lerpf(base_fire_rate, fire_rate_max, anger / anger_max)
 	fire_timer.wait_time = 1.0 / fire_rate
+	
+	if current_target:
+		var d:Vector3 = emitter.global_position.direction_to(current_target.global_position)
+		
+		emitter.set("direction", emitter.global_basis.inverse() * d)
+		emitter.call_deferred("_on_bullet_time")

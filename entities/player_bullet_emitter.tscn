@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7pd12u5ayc8j"]
 
 [ext_resource type="Script" uid="uid://hych71pkip85" path="res://scripts/player_bullet_emitter.gd" id="1_4y51u"]
-[ext_resource type="PackedScene" uid="uid://cvjfxxu8qhkwv" path="res://player_bullet.tscn" id="2_5y80w"]
+[ext_resource type="PackedScene" uid="uid://cvjfxxu8qhkwv" path="res://entities/player_bullet.tscn" id="2_5y80w"]
 
 [node name="PlayerBulletEmitter" type="Node3D" unique_id=919915238 node_paths=PackedStringArray("emitter_timer")]
 script = ExtResource("1_4y51u")

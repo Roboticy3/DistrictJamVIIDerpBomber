@@ -19,6 +19,12 @@ timer = NodePath("Timer")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1045562805]
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Area3D" unique_id=1863164260]
+collision_layer = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/StaticBody3D" unique_id=1020445161]
+shape = SubResource("SphereShape3D_vxas0")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1812646168]
 shape = SubResource("SphereShape3D_vxas0")
 

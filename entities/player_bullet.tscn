@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://cvjfxxu8qhkwv"]
 
 [ext_resource type="ArrayMesh" uid="uid://dt0iccsg5bhrt" path="res://models/Bullet.obj" id="1_mbmgk"]
-[ext_resource type="PackedScene" uid="uid://c66wismulc6no" path="res://bomb.tscn" id="2_oxuh6"]
-[ext_resource type="PackedScene" uid="uid://cjyxv5b6woyd2" path="res://explosion.tscn" id="3_nnlih"]
+[ext_resource type="PackedScene" uid="uid://c66wismulc6no" path="res://entities/bomb.tscn" id="2_oxuh6"]
+[ext_resource type="PackedScene" uid="uid://cjyxv5b6woyd2" path="res://entities/explosion.tscn" id="3_nnlih"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i41lb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbtac"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.5686275)
 
 [node name="PlayerBullet" type="RigidBody3D" unique_id=1316954074]
 collision_layer = 8
@@ -18,16 +22,18 @@ shape = SubResource("SphereShape3D_i41lb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=898171392]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+material_overlay = SubResource("StandardMaterial3D_dbtac")
 mesh = ExtResource("1_mbmgk")
 
 [node name="Timer" type="Timer" parent="." unique_id=1396436238]
 one_shot = true
 autostart = true
 
-[node name="Bomb" parent="." unique_id=92178738 instance=ExtResource("2_oxuh6")]
-collision_mask = 18
+[node name="Bomb" parent="." unique_id=92178738 node_paths=PackedStringArray("body") instance=ExtResource("2_oxuh6")]
+collision_mask = 2
 sensitive = true
 explosion = ExtResource("3_nnlih")
+body = NodePath("..")
 
 [connection signal="timeout" from="Timer" to="." method="queue_free" flags=3]
 [connection signal="timeout" from="Timer" to="Bomb" method="explode"]

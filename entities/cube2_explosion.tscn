@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://by5yr5c88ir5j"]
+
+[ext_resource type="PackedScene" uid="uid://cjyxv5b6woyd2" path="res://entities/explosion.tscn" id="1_2nghx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nghx"]
+albedo_color = Color(0.13750005, 0, 0.75, 1)
+
+[node name="Explosion" unique_id=721047995 instance=ExtResource("1_2nghx")]
+
+[node name="MeshInstance3D" parent="Area3D" parent_id_path=PackedInt32Array(1045562805) index="1" unique_id=1417976396]
+surface_material_override/0 = SubResource("StandardMaterial3D_2nghx")

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dv3suknc17ibv"]
+
+[ext_resource type="ArrayMesh" uid="uid://c3cm623hd14ii" path="res://models/Cube.obj" id="1_h0v41"]
+[ext_resource type="PackedScene" uid="uid://c66wismulc6no" path="res://entities/bomb.tscn" id="2_slg1x"]
+[ext_resource type="Script" uid="uid://dopuxsicdy0io" path="res://scripts/force_standard_basis.gd" id="2_y5cgx"]
+[ext_resource type="PackedScene" uid="uid://d2aety17hyjyn" path="res://entities/cube_explosion.tscn" id="4_1kdel"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j6b50"]
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0v41"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.52156866)
+emission_enabled = true
+emission = Color(0.22500001, 0.75, 0.32125005, 1)
+
+[node name="CubeBullet" type="RigidBody3D" unique_id=1383950408 groups=["critter_bullet"]]
+collision_layer = 16
+collision_mask = 5
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1358837058]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_j6b50")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=139461338]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = ExtResource("1_h0v41")
+surface_material_override/0 = SubResource("StandardMaterial3D_h0v41")
+script = ExtResource("2_y5cgx")
+
+[node name="Timer" type="Timer" parent="." unique_id=163371993]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Bomb" parent="." unique_id=92178738 node_paths=PackedStringArray("body") groups=["critter_bomb"] instance=ExtResource("2_slg1x")]
+collision_mask = 32
+base_damage = 10.0
+explosion_mask = 36
+sensitive = true
+explosion = ExtResource("4_1kdel")
+body = NodePath("..")
+
+[connection signal="timeout" from="Timer" to="Bomb" method="explode"]

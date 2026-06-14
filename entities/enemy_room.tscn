@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dehutqp31w6ig"]
+
+[ext_resource type="Script" uid="uid://cbygg5eg410ay" path="res://scripts/enemy_room.gd" id="1_b6iqt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vcpxj"]
+
+[node name="EnemyRoom" type="Area3D" unique_id=1797546882]
+collision_mask = 2
+script = ExtResource("1_b6iqt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1559243395]
+shape = SubResource("BoxShape3D_vcpxj")
+debug_color = Color(0.8383633, 0.38567954, 0.009137334, 0.41960785)

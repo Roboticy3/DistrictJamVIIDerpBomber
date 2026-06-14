@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bespi00oasmp3" path="res://scripts/aggro.gd" id="1_n65sj"]
 [ext_resource type="Script" uid="uid://c7nsa2tsbnx6i" path="res://scripts/character_rigid_body.gd" id="2_n65sj"]
 [ext_resource type="Script" uid="uid://hych71pkip85" path="res://scripts/player_bullet_emitter.gd" id="5_dmbnc"]
-[ext_resource type="Script" uid="uid://dvdthdt52jfti" path="res://scripts/gun.gd" id="5_y8ul7"]
+[ext_resource type="PackedScene" uid="uid://dv3suknc17ibv" path="res://cube_bullet.tscn" id="6_thq88"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jbd7x"]
 radius = 0.6
@@ -30,27 +30,22 @@ mesh = ExtResource("1_jbd7x")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1129369028]
 shape = SubResource("SphereShape3D_jbd7x")
 
-[node name="Node" type="Node" parent="RigidBody3D" unique_id=58209713 node_paths=PackedStringArray("aggro_timer", "fire_timer", "body")]
+[node name="Aggro" type="Node3D" parent="RigidBody3D" unique_id=1688327760 node_paths=PackedStringArray("aggro_timer", "fire_timer", "body", "emitter")]
 script = ExtResource("1_n65sj")
 aggro_timer = NodePath("Aggro")
 fire_timer = NodePath("Fire")
 body = NodePath("..")
+emitter = NodePath("Emitter")
 
-[node name="Aggro" type="Timer" parent="RigidBody3D/Node" unique_id=1766640401]
+[node name="Emitter" type="Node3D" parent="RigidBody3D/Aggro" unique_id=853224167 node_paths=PackedStringArray("emitter_timer")]
+script = ExtResource("5_dmbnc")
+bullet = ExtResource("6_thq88")
+emitter_timer = NodePath("Dummy")
+
+[node name="Dummy" type="Timer" parent="RigidBody3D/Aggro/Emitter" unique_id=482208902]
+
+[node name="Aggro" type="Timer" parent="RigidBody3D/Aggro" unique_id=1766640401]
 wait_time = 0.1
 autostart = true
 
-[node name="Fire" type="Timer" parent="RigidBody3D/Node" unique_id=1035748549]
-
-[node name="Emitter" type="Node3D" parent="RigidBody3D" unique_id=853224167 node_paths=PackedStringArray("emitter_timer")]
-script = ExtResource("5_dmbnc")
-emitter_timer = NodePath("Timer")
-
-[node name="Timer" type="Timer" parent="RigidBody3D/Emitter" unique_id=482208902]
-wait_time = 0.1
-
-[node name="Gun" type="Node3D" parent="." unique_id=258839002 node_paths=PackedStringArray("ammo_bank", "emitters")]
-script = ExtResource("5_y8ul7")
-ammo_depletion_rate = 0
-ammo_bank = NodePath("../Health")
-emitters = [NodePath("../RigidBody3D")]
+[node name="Fire" type="Timer" parent="RigidBody3D/Aggro" unique_id=1035748549]

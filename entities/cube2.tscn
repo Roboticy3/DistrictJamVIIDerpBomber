@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b4ywx2ha6pbak"]
+
+[ext_resource type="PackedScene" uid="uid://dk73e6jsvrdie" path="res://entities/cube.tscn" id="1_7x51o"]
+[ext_resource type="PackedScene" uid="uid://bfnb5gxsm8bbh" path="res://entities/cube2_bullet.tscn" id="2_j2els"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7x51o"]
+albedo_color = Color(0.66850007, 0.61, 1, 1)
+
+[node name="Cube" unique_id=2062048153 instance=ExtResource("1_7x51o")]
+
+[node name="MeshInstance3D" parent="RigidBody3D" parent_id_path=PackedInt32Array(2113078487) index="0" unique_id=1863183518]
+material_override = SubResource("StandardMaterial3D_7x51o")
+
+[node name="Aggro" parent="RigidBody3D" parent_id_path=PackedInt32Array(2113078487) index="2" unique_id=1688327760]
+base_fire_rate = 0.5
+anger_max = 50.0
+fire_rate_max = 3.0
+
+[node name="Emitter" parent="RigidBody3D/Aggro" index="0" unique_id=853224167]
+spread = 1.0
+speed = 2.0
+bullet = ExtResource("2_j2els")

@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://e2sbru4vv8ft"]
+
+[ext_resource type="PackedScene" uid="uid://dk73e6jsvrdie" path="res://entities/cube.tscn" id="1_k2k1l"]
+[ext_resource type="PackedScene" uid="uid://buiqwbtkalfyl" path="res://entities/player.tscn" id="2_ponhg"]
+[ext_resource type="Script" uid="uid://chhj2bd8jdlyq" path="res://scripts/look_at_process.gd" id="3_ponhg"]
+[ext_resource type="PackedScene" uid="uid://c0wgpjwwyf6a2" path="res://ui/settings.tscn" id="4_yg3sr"]
+[ext_resource type="PackedScene" uid="uid://c4wxl1r27oann" path="res://entities/player_bomb.tscn" id="5_hkt8g"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k2k1l"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ponhg"]
+sky_material = SubResource("ProceduralSkyMaterial_k2k1l")
+
+[sub_resource type="Environment" id="Environment_yg3sr"]
+background_mode = 2
+sky = SubResource("Sky_ponhg")
+tonemap_mode = 2
+
+[node name="Test2" type="Node3D" unique_id=1662176487]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1112991501]
+environment = SubResource("Environment_yg3sr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1714846548]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Cube" parent="." unique_id=2062048153 instance=ExtResource("1_k2k1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.954359)
+
+[node name="RigidBody3D" parent="Cube" index="1" unique_id=2113078487]
+constant_torque = Vector3(1, 1, 1)
+
+[node name="Player" parent="." unique_id=1473064690 instance=ExtResource("2_ponhg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.9934444)
+speed_neutral = 0.0
+speed_reverse = 0.0
+speed_forward = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=138449591 node_paths=PackedStringArray("targets")]
+transform = Transform3D(0.20496148, -0.36085865, 0.9098197, 0.02245516, 0.9310432, 0.36421782, -0.9785125, -0.05422048, 0.19893114, 6.719199, 4.1154394, 1.0918012)
+current = true
+script = ExtResource("3_ponhg")
+targets = [NodePath("../Cube"), NodePath("../Player")]
+
+[node name="Settings" parent="." unique_id=1247447749 instance=ExtResource("4_yg3sr")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=453979785]
+
+[node name="PlayerBomb" parent="." unique_id=1291548106 instance=ExtResource("5_hkt8g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4198341, 0)
+
+[editable path="Cube"]
+[editable path="Player"]
+[editable path="Player/HudMain"]

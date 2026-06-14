@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://xrc30ay25lci"]
 
-[ext_resource type="PackedScene" uid="uid://c0wgpjwwyf6a2" path="res://settings.tscn" id="1_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://c0wgpjwwyf6a2" path="res://ui/settings.tscn" id="1_6uqi0"]
 [ext_resource type="Material" uid="uid://p4jwbsoywgtf" path="res://materials/tile.tres" id="1_37kl0"]
-[ext_resource type="PackedScene" uid="uid://buiqwbtkalfyl" path="res://player.tscn" id="2_8uh7m"]
-[ext_resource type="PackedScene" uid="uid://dk73e6jsvrdie" path="res://cube.tscn" id="4_ppyta"]
-[ext_resource type="PackedScene" uid="uid://bbyirf5hk5hnq" path="res://box.tscn" id="5_ykrsh"]
+[ext_resource type="PackedScene" uid="uid://buiqwbtkalfyl" path="res://entities/player.tscn" id="2_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://dk73e6jsvrdie" path="res://entities/cube.tscn" id="4_ppyta"]
+[ext_resource type="PackedScene" uid="uid://bbyirf5hk5hnq" path="res://entities/box.tscn" id="5_ykrsh"]
+[ext_resource type="PackedScene" uid="uid://b4ywx2ha6pbak" path="res://entities/cube2.tscn" id="6_6g8e2"]
+[ext_resource type="PackedScene" uid="uid://dehutqp31w6ig" path="res://entities/enemy_room.tscn" id="7_u45fp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_37kl0"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -50,3 +52,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2029676, 1.162283, -1.9713
 
 [node name="Box4" parent="." unique_id=921692688 instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4542222, -2.1453385, -1.4295325)
+
+[node name="Cube3" parent="." unique_id=828836320 instance=ExtResource("6_6g8e2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3.745949, 4.0204563)
+
+[node name="EnemyRoom" parent="." unique_id=1797546882 instance=ExtResource("7_u45fp")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
