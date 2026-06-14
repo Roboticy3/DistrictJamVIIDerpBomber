@@ -11,6 +11,11 @@
 [ext_resource type="Material" uid="uid://p4jwbsoywgtf" path="res://materials/tile.tres" id="6_xdh4e"]
 [ext_resource type="PackedScene" uid="uid://dxf5x4kxo5qjv" path="res://entities/key.tscn" id="9_etqu2"]
 [ext_resource type="PackedScene" uid="uid://cmbnenolkxpv8" path="res://entities/item_lock.tscn" id="10_c7dyn"]
+[ext_resource type="Texture2D" uid="uid://dyhb7ubpo7vn0" path="res://models/DairyCoHolsteinCows-1403535116.jpg" id="12_1fput"]
+[ext_resource type="Texture2D" uid="uid://c2dcx1r6op20u" path="res://models/green-grass-2723191629.jpg" id="12_c7dyn"]
+[ext_resource type="Script" uid="uid://cqelhnx4s6hx5" path="res://scripts/level_loader.gd" id="14_21ko3"]
+[ext_resource type="PackedScene" uid="uid://c6ch5msrrndqp" path="res://entities/fence.tscn" id="16_21ko3"]
+[ext_resource type="PackedScene" uid="uid://c3nafek2fir4g" path="res://ui/loading.tscn" id="16_iwo8l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l8qe7"]
 size = Vector3(18.860352, 9.413086, 20.597412)
@@ -150,7 +155,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-12.235826, 11.054175, 0)]
+"values": [Vector3(6.1670256, 11.054175, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_jw1n3"]
@@ -213,6 +218,24 @@ _data = {
 &"RESET": SubResource("Animation_1fput"),
 &"open": SubResource("Animation_c7dyn")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xdh4e"]
+custom_solver_bias = 1.0
+size = Vector3(5.5, 5.5, 5.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21ko3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1fput"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6yxbg"]
+albedo_color = Color(0.07999998, 0.92333317, 1, 1)
+metallic_specular = 1.0
+roughness = 0.06
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s07ge"]
+albedo_texture = ExtResource("12_c7dyn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwo8l"]
 
 [node name="Main" type="Node3D" unique_id=2134446172]
 
@@ -514,7 +537,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.761686, 14.383917, -1.8295
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.148745, 9.975426, -1.207557)
 
 [node name="PenultimateDoor" type="CSGBox3D" parent="Terrain" unique_id=2082293190]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.235826, 11.054175, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1670256, 11.054175, 0)
 use_collision = true
 size = Vector3(3.8554688, 1, 10.751953)
 
@@ -555,6 +578,90 @@ transform = Transform3D(0.24999996, 0, 0, 0, 0.25, 0, 0, 0, 0.24999996, 9.986945
 [node name="Key" parent="KeyHolder" unique_id=921083399 instance=ExtResource("9_etqu2")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
 
+[node name="Lawn" type="Node3D" parent="." unique_id=700037480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4, 8.3, 0)
+
+[node name="Area3D" type="Area3D" parent="Lawn" unique_id=868264887]
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lawn/Area3D" unique_id=672641695]
+shape = SubResource("BoxShape3D_xdh4e")
+debug_color = Color(0.6120452, 0, 0.1873838, 0.41960785)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lawn" unique_id=2123061719]
+light_size = 0.161
+shadow_enabled = true
+shadow_blur = 1.689
+distance_fade_enabled = true
+distance_fade_begin = 5.0
+distance_fade_shadow = 5.0
+distance_fade_length = 5.0
+omni_range = 5.29316
+
+[node name="Sprite3D" type="Label3D" parent="Lawn" unique_id=832662407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3540573, -1.2484851, 1.7341931)
+billboard = 1
+outline_modulate = Color(0, 0, 0, 0)
+text = "Congradulations!
+Bing has invited you
+to play in his lawn!
+
+Dev controls:
+F1: pause enemies
+F2: noclip"
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lawn/Sprite3D" unique_id=460644190]
+cast_shadow = 3
+use_collision = true
+material = SubResource("StandardMaterial3D_21ko3")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Lawn" unique_id=1586718896]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1.0504332, -2.1067896, -1.2852402)
+billboard = 2
+transparent = false
+texture = ExtResource("12_1fput")
+
+[node name="Area3D2" type="Area3D" parent="Lawn" unique_id=548368908]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2.5349078, 0.2633772, 4.529953e-06)
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lawn/Area3D2" unique_id=24326142]
+shape = SubResource("BoxShape3D_1fput")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Lawn/Area3D2" unique_id=1837312173]
+material_override = SubResource("StandardMaterial3D_6yxbg")
+
+[node name="Label3D" type="Label3D" parent="Lawn/Area3D2" unique_id=1341185470]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.52914333, 0, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Return to 
+main menu"
+
+[node name="Node" type="Node" parent="Lawn/Area3D2" unique_id=1257326031]
+script = ExtResource("14_21ko3")
+level_path = "res://ui/main_menu.tscn"
+load_scene = ExtResource("16_iwo8l")
+preload_level = false
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Lawn" unique_id=152634229]
+size = Vector3(5.5, 5.5, 5.5)
+
+[node name="Fence" parent="Lawn" unique_id=1602187119 instance=ExtResource("16_21ko3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0097342, -3.0172005, -1.0054944)
+
+[node name="Fence2" parent="Lawn" unique_id=2083145481 instance=ExtResource("16_21ko3")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.009734154, -3.0172005, -0.005494356)
+
+[node name="Fence3" parent="Lawn" unique_id=464252403 instance=ExtResource("16_21ko3")]
+transform = Transform3D(-1, 0, 6.7055225e-08, 0, 1, 0, -6.7055225e-08, 0, -1, 1.0097342, -3.0172005, 0.99450564)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Lawn" unique_id=1787945124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.9930067, 0)
+material_override = SubResource("StandardMaterial3D_s07ge")
+size = Vector3(6, 0.1, 6)
+material = SubResource("StandardMaterial3D_iwo8l")
+
 [connection signal="completed" from="EnemyRoom" to="AnimationPlayer" method="play" binds= [&"drop_cylinder"]]
 [connection signal="completed" from="EnemyRoom" to="Terrain/Box5" method="set_process_mode" binds= [0]]
 [connection signal="completed" from="EnemyRoom2" to="AnimationPlayer" method="play" binds= [&"drop_cylinder"]]
@@ -562,6 +669,8 @@ transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
 [connection signal="completed" from="EnemyRoom3" to="Terrain/CSGBox3D/AnimationPlayer" method="play" binds= [&"dynamic_experiment"]]
 [connection signal="completed" from="EnemyRoom5" to="Terrain/PenultimateDoor/AnimationPlayer" method="play" binds= [&"open"]]
 [connection signal="unlocked" from="Terrain/FinalDoor/Area3D" to="Terrain/FinalDoor/AnimationPlayer" method="play" binds= [&"open"]]
+[connection signal="body_entered" from="Lawn/Area3D" to="Lawn/Sprite3D" method="set_visible" unbinds=1 binds= [true]]
+[connection signal="body_entered" from="Lawn/Area3D2" to="Lawn/Area3D2/Node" method="mount_level" unbinds=1]
 
 [editable path="EnemyRoom"]
 [editable path="EnemyRoom2"]

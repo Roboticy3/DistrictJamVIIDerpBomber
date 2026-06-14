@@ -1,6 +1,6 @@
 extends Node
 
-@export var level:PackedScene
+@export var level_path:String
 @export var load_scene:PackedScene
 @export var preload_level := true
 
@@ -18,7 +18,9 @@ func load_level():
 	get_tree().root.add_child(loading)
 	
 	print("loading level")
-	instance = level.instantiate()
+	var packed := load(level_path)
+	if packed is PackedScene:
+		instance = packed.instantiate()
 	
 	await get_tree().process_frame
 	
