@@ -5,6 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_vcpxj"]
 
 [node name="EnemyRoom" type="Area3D" unique_id=1797546882]
+collision_layer = 128
 collision_mask = 2
 script = ExtResource("1_b6iqt")
 

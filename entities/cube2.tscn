@@ -8,10 +8,14 @@ albedo_color = Color(0.66850007, 0.61, 1, 1)
 
 [node name="Cube" unique_id=2062048153 instance=ExtResource("1_7x51o")]
 
-[node name="MeshInstance3D" parent="RigidBody3D" parent_id_path=PackedInt32Array(2113078487) index="0" unique_id=1863183518]
+[node name="RigidBody3D" parent="." index="1" unique_id=2113078487]
+gravity_scale = 0.0
+continuous_cd = true
+
+[node name="MeshInstance3D" parent="RigidBody3D" index="0" unique_id=1863183518]
 material_override = SubResource("StandardMaterial3D_7x51o")
 
-[node name="Aggro" parent="RigidBody3D" parent_id_path=PackedInt32Array(2113078487) index="2" unique_id=1688327760]
+[node name="Aggro" parent="RigidBody3D" index="2" unique_id=1688327760]
 base_fire_rate = 0.5
 anger_max = 50.0
 fire_rate_max = 3.0
@@ -20,3 +24,6 @@ fire_rate_max = 3.0
 spread = 1.0
 speed = 2.0
 bullet = ExtResource("2_j2els")
+
+[node name="OmniLight3D" parent="RigidBody3D" index="3" unique_id=606110287]
+light_color = Color(0.6666667, 0.6117647, 1, 1)

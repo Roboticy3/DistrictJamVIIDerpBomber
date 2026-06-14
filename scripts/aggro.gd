@@ -3,11 +3,16 @@ extends Node
 @export var aggro_group := &"player_body"
 @export var aggro_timer:Timer
 @export var fire_timer:Timer
+@export var anger_animator:AnimationPlayer
 
 @export var body:RigidBody3D
 @export var base_fire_rate := 1.0
 @export var anger_max := 20.0
 @export var fire_rate_max := 10.0
+@export var anger_anim_max := 4.0
+
+@export var min_target_distance := 3.0
+@export var fear_force := 100.0
 
 @export var emitter:Node
 
@@ -41,7 +46,7 @@ func _on_process_aggro() -> void:
 			break
 	
 	if !target_found:
-		print(self, " lost eyes on target ", current_target)
+		#print(self, " lost eyes on target ", current_target)
 		current_target = null
 	
 	if current_target != null and old_target == null:
@@ -60,6 +65,8 @@ func _physics_process(delta: float) -> void:
 		if anger < 0.0:
 			anger = 0.0
 	
+	anger_animator.speed_scale = lerpf(0.0, anger_anim_max, anger / anger_max)
+	
 	#print(fire_timer.time_left)
 
 func _on_process_fire():
@@ -70,6 +77,12 @@ func _on_process_fire():
 	fire_timer.wait_time = 1.0 / fire_rate
 	
 	if current_target:
+		var bv := current_target.global_position - body.global_position
+		if bv.length() < min_target_distance:
+			body.apply_central_force(bv.reflect(Vector3.UP).normalized() * fear_force)
+			anger *= 0.5
+			return
+		
 		var d:Vector3 = emitter.global_position.direction_to(current_target.global_position)
 		
 		emitter.set("direction", emitter.global_basis.inverse() * d)

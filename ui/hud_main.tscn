@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://b8h3rbp5x3fxa"]
 
+[ext_resource type="Script" uid="uid://cuysc8ig1wvat" path="res://scripts/regen.gd" id="1_grtky"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_as1pi"]
 bg_color = Color(0.8745098, 0.4627451, 0.4117647, 0.8392157)
 corner_radius_top_left = 4
@@ -7,7 +9,14 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="HudMain" type="Control" unique_id=2045119173]
+[sub_resource type="LabelSettings" id="LabelSettings_6oaxp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_grtky"]
+font_size = 28
+
+[node name="HudMain" type="CanvasLayer" unique_id=1239231320]
+
+[node name="HudMain" type="Control" parent="." unique_id=2045119173]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1545716098]
+[node name="VBoxContainer" type="VBoxContainer" parent="HudMain" unique_id=1545716098]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.059000004
@@ -29,35 +38,87 @@ offset_bottom = -0.364563
 grow_vertical = 0
 rotation = -0.07853982
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1600360005]
+[node name="HBoxContainer" type="HBoxContainer" parent="HudMain/VBoxContainer" unique_id=1600360005]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=829973918]
+[node name="Label" type="Label" parent="HudMain/VBoxContainer/HBoxContainer" unique_id=829973918]
 layout_mode = 2
 text = "Ammo"
 
-[node name="Ammo" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=922884690]
+[node name="Ammo" type="ProgressBar" parent="HudMain/VBoxContainer/HBoxContainer" unique_id=922884690]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 200.0
 value = 200.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1633113227]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HudMain/VBoxContainer" unique_id=1633113227]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=2002453944]
+[node name="Label" type="Label" parent="HudMain/VBoxContainer/HBoxContainer2" unique_id=2002453944]
 layout_mode = 2
 text = "Health"
 
-[node name="Health" type="ProgressBar" parent="VBoxContainer/HBoxContainer2" unique_id=1946164708]
+[node name="Health" type="ProgressBar" parent="HudMain/VBoxContainer/HBoxContainer2" unique_id=1946164708]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_as1pi")
 max_value = 200.0
 value = 200.0
+script = ExtResource("1_grtky")
 
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer2" unique_id=553288514]
+[node name="Control" type="Control" parent="HudMain/VBoxContainer/HBoxContainer2" unique_id=553288514]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HudMain" unique_id=1933238796]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.094000004
+anchor_top = 0.72800004
+anchor_right = 0.25500003
+anchor_bottom = 0.89500004
+offset_left = -0.44339752
+offset_top = -11.729095
+offset_right = -0.06655884
+offset_bottom = 16.05487
+rotation = 0.06145755
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HudMain/VBoxContainer2" unique_id=1663897304]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HudMain/VBoxContainer2/VBoxContainer" unique_id=704751376]
+layout_mode = 2
+size_flags_vertical = 1
+text = "ENEMIES IN THIS ROOM"
+label_settings = SubResource("LabelSettings_6oaxp")
+
+[node name="Label2" type="Label" parent="HudMain/VBoxContainer2/VBoxContainer" unique_id=313468250]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_grtky")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HudMain/VBoxContainer2" unique_id=1133849910]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HudMain/VBoxContainer2/MarginContainer" unique_id=1268387991]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HudMain/VBoxContainer2/MarginContainer/VBoxContainer2" unique_id=659977003]
+layout_mode = 2
+size_flags_vertical = 1
+text = "ENEMIES TOTAL"
+label_settings = SubResource("LabelSettings_6oaxp")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="HudMain/VBoxContainer2/MarginContainer/VBoxContainer2" unique_id=2089627766]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_grtky")
+horizontal_alignment = 1

@@ -8,7 +8,7 @@ var registered := false
 signal completed
 
 # Called when the node enters the scene tree for the first time.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !critters.is_empty():
 		registered = true
 		set_physics_process(false)
@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		critters.push_back(b)
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var complete := registered
 	for b in critters:
 		if is_instance_valid(b):
@@ -31,3 +31,10 @@ func _process(delta: float) -> void:
 		completed.emit()
 		RewardComplex.reward()
 		queue_free()
+
+func get_critters_remaining() -> int:
+	var remaining := 0
+	for b in critters:
+		if is_instance_valid(b):
+			remaining += 1
+	return remaining

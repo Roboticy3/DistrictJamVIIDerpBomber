@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://c4wxl1r27oann" path="res://entities/player_bomb.tscn" id="10_dchgp"]
 [ext_resource type="Script" uid="uid://buyuuxgf4orqx" path="res://scripts/player_bomb_aimer.gd" id="10_x08pd"]
 [ext_resource type="Script" uid="uid://drkdjbvxaio3u" path="res://scripts/player_bomb_ammo_visualizer.gd" id="12_kdgjc"]
+[ext_resource type="Script" uid="uid://bh4gxha05epl" path="res://scripts/item_rack.gd" id="13_oprnr"]
+[ext_resource type="Script" uid="uid://cuysc8ig1wvat" path="res://scripts/regen.gd" id="14_0i614"]
+[ext_resource type="Script" uid="uid://q7qqjoyc2n6k" path="res://scripts/show_only_in_enemy_room.gd" id="14_q0i8f"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
 bounce = 1.0
@@ -23,10 +26,11 @@ bounce = 1.0
 script = ExtResource("1_4flbx")
 sensor = NodePath("Body/RayCast3D")
 body = NodePath("Body")
+acceleration = 10.0
 garbage = NodePath(".")
 gun = NodePath("Body/Arsenal/Gun")
 
-[node name="Body" type="RigidBody3D" parent="." unique_id=1893002538 node_paths=PackedStringArray("health", "ammos") groups=["player_body"]]
+[node name="Body" type="RigidBody3D" parent="." unique_id=1893002538 node_paths=PackedStringArray("health", "ammos", "enemy_room_detector", "enemies_remaining_label", "enemies_total_label", "collectibles_visual") groups=["player_body"]]
 collision_layer = 32
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
@@ -34,8 +38,12 @@ gravity_scale = 0.0
 continuous_cd = true
 script = ExtResource("2_2hs0m")
 cancel_rotation = true
-health = NodePath("../HudMain/VBoxContainer/HBoxContainer2/Health")
-ammos = [NodePath("../HudMain/VBoxContainer/HBoxContainer/Ammo"), NodePath("Arsenal/Bomb/BombAmmo")]
+health = NodePath("../HudMain/HudMain/VBoxContainer/HBoxContainer2/Health")
+ammos = [NodePath("../HudMain/HudMain/VBoxContainer/HBoxContainer/Ammo"), NodePath("Arsenal/Bomb/BombAmmo")]
+enemy_room_detector = NodePath("Area3D")
+enemies_remaining_label = NodePath("../HudMain/HudMain/VBoxContainer2/VBoxContainer/Label2")
+enemies_total_label = NodePath("../HudMain/HudMain/VBoxContainer2/MarginContainer/VBoxContainer2/Label4")
+collectibles_visual = NodePath("SpringArm/ItemsBase/Items")
 
 [node name="Camera3D" type="Camera3D" parent="Body" unique_id=1033686848]
 current = true
@@ -61,7 +69,7 @@ weapons = [NodePath("Gun"), NodePath("Bomb")]
 
 [node name="Gun" type="Node3D" parent="Body/Arsenal" unique_id=1062813560 node_paths=PackedStringArray("ammo_bank", "emitters")]
 script = ExtResource("6_2hs0m")
-ammo_bank = NodePath("../../../HudMain/VBoxContainer/HBoxContainer/Ammo")
+ammo_bank = NodePath("../../../HudMain/HudMain/VBoxContainer/HBoxContainer/Ammo")
 emitters = [NodePath("Turrets/Turret/Emitter/PlayerBulletEmitter"), NodePath("Turrets/Turret2/Emitter/PlayerBulletEmitter")]
 
 [node name="Turrets" type="Node3D" parent="Body/Arsenal/Gun" unique_id=1051849389]
@@ -146,6 +154,32 @@ transform = Transform3D(-0.04500873, 0.077957384, 0.04355296, -0.06002122, 0.009
 material_override = ExtResource("9_tjdhl")
 mesh = ExtResource("8_ef06p")
 
+[node name="Area3D" type="Area3D" parent="Body" unique_id=567611808]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Area3D" unique_id=792333363]
+shape = SubResource("SphereShape3D_sh265")
+
+[node name="SpringArm" type="SpringArm3D" parent="Body" unique_id=1554898072]
+transform = Transform3D(-0.69747776, -0.22911347, 0.6789931, 0, 0.94751203, 0.31972015, -0.7166064, 0.2229977, -0.66086864, 0, 0, 0)
+collision_mask = 5
+
+[node name="ItemsBase" type="Node3D" parent="Body/SpringArm" unique_id=1737214247]
+transform = Transform3D(0.049999997, 0, 0, 0, 0.05, 1.8626451e-09, 0, -4.656613e-10, 0.049999997, 0, 0, 0)
+
+[node name="Items" type="Node3D" parent="Body/SpringArm/ItemsBase" unique_id=75320191]
+transform = Transform3D(1.0000001, 1.4901161e-08, 0, -1.4901161e-08, 1, 1.4901161e-08, 5.9604645e-08, 0, 1, 8.881784e-16, -2.617665e-08, -5.7566853)
+script = ExtResource("13_oprnr")
+
 [node name="HudMain" parent="." unique_id=2045119173 instance=ExtResource("5_sweqy")]
+
+[node name="Ammo" parent="HudMain/HudMain/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045119173, 1600360005) index="1" unique_id=922884690]
+script = ExtResource("14_0i614")
+frequency = 2.0
+
+[node name="VBoxContainer" parent="HudMain/HudMain/VBoxContainer2" parent_id_path=PackedInt32Array(2045119173, 1933238796) index="0" unique_id=1663897304 node_paths=PackedStringArray("body")]
+script = ExtResource("14_q0i8f")
+body = NodePath("../../../../Body")
 
 [editable path="HudMain"]

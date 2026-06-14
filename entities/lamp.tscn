@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dnkig1evwkd7d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wde0"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.55
+
+[node name="Lamp" type="Node3D" unique_id=1827734176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3000001, 0.02501297)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1265533734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+use_collision = true
+height = 1.5
+cone = true
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=430713847]
+cast_shadow = 0
+radius = 0.4
+height = 0.2
+material = SubResource("StandardMaterial3D_3wde0")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=512036104]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.8, 0)
+light_energy = 2.0
+light_size = 0.285
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_shadow = 20.0
+spot_range = 10.0
+spot_angle = 22.671444

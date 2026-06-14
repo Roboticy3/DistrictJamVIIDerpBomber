@@ -7,7 +7,7 @@ extends Node
 @export var speed_neutral := 3.0
 @export var speed_reverse := -0.5
 @export var speed_forward := 3.0
-@export var acceleration := 5.0
+@export var acceleration := .0
 @export var terminal_velocity := 20.0
 
 @export var current_up := Vector3.UP

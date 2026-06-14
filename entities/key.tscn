@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dxf5x4kxo5qjv"]
+
+[ext_resource type="Material" uid="uid://byt85ip3cx7n7" path="res://materials/gold.tres" id="1_lwijo"]
+[ext_resource type="Script" uid="uid://bpuopt5irygxd" path="res://scripts/collectible.gd" id="2_2nk70"]
+[ext_resource type="Script" uid="uid://d0ysp3ugpgt08" path="res://scripts/shiny.gd" id="2_xagmd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4o27a"]
+size = Vector3(4, 4, 4)
+
+[node name="Key" type="Node3D" unique_id=921083399]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=603260214 node_paths=PackedStringArray("body", "model")]
+collision_layer = 128
+collision_mask = 32
+script = ExtResource("2_2nk70")
+body = NodePath("..")
+model = NodePath("../Model")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=762896643]
+shape = SubResource("BoxShape3D_4o27a")
+
+[node name="Model" type="Node3D" parent="." unique_id=1720442387]
+script = ExtResource("2_xagmd")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Model" unique_id=56819300]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.025000095, 0.025000036, 0)
+material = ExtResource("1_lwijo")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model" unique_id=1184409448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024999976, -1.425, 0)
+material_override = ExtResource("1_lwijo")
+radius = 0.3
+height = 1.5
+cone = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Model" unique_id=1492884205]
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 10.0
+distance_fade_shadow = 5.0
+omni_range = 10.0

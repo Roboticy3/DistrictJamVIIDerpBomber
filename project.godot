@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Derp Bomber"
-run/main_scene="uid://xrc30ay25lci"
+run/main_scene="uid://jhkonqnjqbpd"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://materials/icon.svg"
 
@@ -19,12 +19,14 @@ config/icon="res://materials/icon.svg"
 
 SettingsStore="*uid://defuntaw7h6t0"
 RewardComplex="*uid://mvr02hucwuyq"
+DebugKeys="*uid://di216pgl5hrll"
 
 [global_group]
 
 critter_bullet=""
 critter_bomb=""
 player_body=""
+critter=""
 
 [gui]
 
@@ -62,6 +64,7 @@ ars_down={
 3d_physics/layer_5="Floaters"
 3d_physics/layer_6="Player"
 3d_physics/layer_7="Fog"
+3d_physics/layer_8="Triggers"
 
 [physics]
 

@@ -13,14 +13,53 @@ albedo_color = Color(0.74, 1, 0.61, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_jbd7x"]
 radius = 0.6
 
+[sub_resource type="Animation" id="Animation_53d4l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RigidBody3D/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a3271"]
+resource_name = "anger"
+length = 0.5
+loop_mode = 2
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RigidBody3D/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.1, 0.14666665, 0.2, 0.26666668, 0.33333334, 0.4, 0.46666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.10705778, -0.04108118, -0.18841147), Vector3(-0.18072662, -0.04481583, -0.096322514), Vector3(-0.08326531, -0.0948697, -0.10434939), Vector3(-0.08646783, -0.011128083, 0.009651668), Vector3(-0.022265878, 0.03229908, 0.08908564), Vector3(-0.050286062, -0.023089115, 0.095024675), Vector3(1.1920929e-07, -0.024532186, 0.05592756), Vector3(0, 0.012462781, -0.010952891), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_53d4l"]
+_data = {
+&"RESET": SubResource("Animation_53d4l"),
+&"anger": SubResource("Animation_a3271")
+}
+
 [node name="Cube" type="Node3D" unique_id=2062048153]
 
 [node name="Health" parent="." unique_id=93474449 instance=ExtResource("1_ftslj")]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=2113078487 node_paths=PackedStringArray("health")]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=2113078487 node_paths=PackedStringArray("health") groups=["critter"]]
 collision_layer = 2
 collision_mask = 7
-gravity_scale = 0.0
+gravity_scale = 0.2
 linear_damp = 5.0
 angular_damp = 10.0
 script = ExtResource("2_n65sj")
@@ -34,10 +73,11 @@ mesh = ExtResource("1_jbd7x")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1129369028]
 shape = SubResource("SphereShape3D_jbd7x")
 
-[node name="Aggro" type="Node3D" parent="RigidBody3D" unique_id=1688327760 node_paths=PackedStringArray("aggro_timer", "fire_timer", "body", "emitter")]
+[node name="Aggro" type="Node3D" parent="RigidBody3D" unique_id=1688327760 node_paths=PackedStringArray("aggro_timer", "fire_timer", "anger_animator", "body", "emitter")]
 script = ExtResource("1_n65sj")
 aggro_timer = NodePath("Aggro")
 fire_timer = NodePath("Fire")
+anger_animator = NodePath("../../AnimationPlayer")
 body = NodePath("..")
 emitter = NodePath("Emitter")
 
@@ -54,3 +94,14 @@ wait_time = 0.1
 autostart = true
 
 [node name="Fire" type="Timer" parent="RigidBody3D/Aggro" unique_id=1035748549]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="RigidBody3D" unique_id=606110287]
+light_color = Color(0.7411765, 1, 0.6117647, 1)
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_shadow = 20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1823939081]
+libraries/ = SubResource("AnimationLibrary_53d4l")
+autoplay = &"anger"
+speed_scale = 0.0

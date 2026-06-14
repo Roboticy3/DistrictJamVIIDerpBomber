@@ -17,7 +17,7 @@ func _ready() -> void:
 	area.scale = Vector3.ONE * radius
 	area.collision_mask = collision_mask
 	
-	create_tween().tween_property(area, "scale", Vector3.ZERO, timer.wait_time).set_trans(Tween.TRANS_CIRC)
+	create_tween().tween_property(area, "scale", Vector3.ONE * 0.01, timer.wait_time).set_trans(Tween.TRANS_CIRC)
 
 func _physics_process(_delta: float) -> void:
 	for b in area.get_overlapping_bodies():
