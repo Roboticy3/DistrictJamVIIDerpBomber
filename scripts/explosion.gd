@@ -9,6 +9,7 @@ extends Node
 @export_flags_3d_physics var collision_mask:int
 
 @export var timer:Timer
+@export var sound:AudioStreamPlayer3D
 
 var afflicted_targets:Dictionary[Node, bool] = {}
 
@@ -17,7 +18,14 @@ func _ready() -> void:
 	area.scale = Vector3.ONE * radius
 	area.collision_mask = collision_mask
 	
+	if sound:
+		sound.max_distance = radius * 5
+		sound.volume_linear = 0.1 + damage * 0.01
+		sound.pitch_scale = 1.0 - damage * 0.005
+		create_tween().tween_property(sound, "pitch_scale", 0.25 - damage * 0.005, timer.wait_time)
+	
 	create_tween().tween_property(area, "scale", Vector3.ONE * 0.01, timer.wait_time).set_trans(Tween.TRANS_CIRC)
+	
 
 func _physics_process(_delta: float) -> void:
 	for b in area.get_overlapping_bodies():

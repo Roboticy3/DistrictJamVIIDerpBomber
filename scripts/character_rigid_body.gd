@@ -4,6 +4,9 @@ extends RigidBody3D
 
 @export var health:Range
 var immortal := false
+@export var damage_sound:AudioStreamPlayer3D
+@export var death_explosion:PackedScene
+signal died
 
 @export var ammos:Array[Range]
 
@@ -22,8 +25,15 @@ func _ready() -> void:
 	health.value_changed.connect(_on_health_changed)
 
 func _on_health_changed(new_value:float):
+	if !immortal and damage_sound:
+		damage_sound.play()
 	if new_value <= health.min_value and !immortal:
 		queue_free() 
+		died.emit()
+		if death_explosion:
+			var instance := death_explosion.instantiate()
+			instance.set("transform", global_transform)
+			get_tree().root.add_child(instance)
 
 func _integrate_forces(state):
 	if cancel_rotation:

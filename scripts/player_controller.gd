@@ -10,6 +10,10 @@ extends Node
 @export var acceleration :=10.0
 @export var terminal_velocity := 20.0
 
+@export var hover_sound:AudioStreamPlayer3D
+@export var hover_pitch_min := 0.75
+@export var hover_pitch_max := 1.25
+
 @export var current_up := Vector3.UP
 
 @export var garbage:Node3D
@@ -74,3 +78,6 @@ func _physics_process(delta: float) -> void:
 	
 	if body.linear_velocity.length() >= terminal_velocity:
 		body.linear_velocity = body.linear_velocity.limit_length(terminal_velocity)
+	
+	var pitch_factor:float = inverse_lerp(-speed_reverse, speed_forward, body.linear_velocity.length())
+	hover_sound.pitch_scale = lerpf(hover_pitch_min, hover_pitch_max, pitch_factor)

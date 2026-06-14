@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c3nafek2fir4g" path="res://ui/loading.tscn" id="5_p8ri8"]
 [ext_resource type="PackedScene" uid="uid://c0wgpjwwyf6a2" path="res://ui/settings.tscn" id="6_ei257"]
 [ext_resource type="Script" uid="uid://iusvh1qlrr8f" path="res://scripts/end_game.gd" id="7_p8ri8"]
+[ext_resource type="AudioStream" uid="uid://cwunoyev12vsj" path="res://music/673559__qleq__chinese-new-year-celebration.wav" id="8_ubpvv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ettg"]
 atlas = ExtResource("2_wk0pr")
@@ -141,6 +142,13 @@ affect_mouse_mode = false
 
 [node name="EndGame" type="Node" parent="." unique_id=594025815]
 script = ExtResource("7_p8ri8")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1150874993]
+stream = ExtResource("8_ubpvv")
+volume_db = -6.132
+pitch_scale = 0.94
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2/VBoxContainer/Button" to="Loader" method="mount_level"]
 [connection signal="pressed" from="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2/VBoxContainer/Button3" to="Settings" method="open"]

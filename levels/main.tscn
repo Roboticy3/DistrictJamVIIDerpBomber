@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://cqelhnx4s6hx5" path="res://scripts/level_loader.gd" id="14_21ko3"]
 [ext_resource type="PackedScene" uid="uid://c6ch5msrrndqp" path="res://entities/fence.tscn" id="16_21ko3"]
 [ext_resource type="PackedScene" uid="uid://c3nafek2fir4g" path="res://ui/loading.tscn" id="16_iwo8l"]
+[ext_resource type="AudioStream" uid="uid://bwr8fus30v8lk" path="res://music/factory.mp3" id="17_s07ge"]
+[ext_resource type="AudioStream" uid="uid://cwunoyev12vsj" path="res://music/673559__qleq__chinese-new-year-celebration.wav" id="18_iwo8l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l8qe7"]
 size = Vector3(18.860352, 9.413086, 20.597412)
@@ -236,6 +238,12 @@ roughness = 0.06
 albedo_texture = ExtResource("12_c7dyn")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwo8l"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j7211"]
+streams_count = 2
+stream_0/stream = ExtResource("17_s07ge")
+stream_1/stream = ExtResource("18_iwo8l")
+stream_1/weight = 0.1
 
 [node name="Main" type="Node3D" unique_id=2134446172]
 
@@ -661,6 +669,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.9930067, 0)
 material_override = SubResource("StandardMaterial3D_s07ge")
 size = Vector3(6, 0.1, 6)
 material = SubResource("StandardMaterial3D_iwo8l")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1732583853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.713516, -1.5180387, -11.553167)
+stream = SubResource("AudioStreamRandomizer_j7211")
+unit_size = 100.0
+autoplay = true
+max_distance = 25.0
+bus = &"Ambient"
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="." unique_id=1436240939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.555082, -19.767643, 8.847906)
+stream = SubResource("AudioStreamRandomizer_j7211")
+unit_size = 100.0
+autoplay = true
+max_distance = 25.0
+bus = &"Ambient"
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer" parent="." unique_id=603945392]
+bus = &"Music"
 
 [connection signal="completed" from="EnemyRoom" to="AnimationPlayer" method="play" binds= [&"drop_cylinder"]]
 [connection signal="completed" from="EnemyRoom" to="Terrain/Box5" method="set_process_mode" binds= [0]]

@@ -4,6 +4,7 @@ extends Node3D
 @export var speed := 20.0
 @export var direction := Vector3.FORWARD
 @export var bullet:PackedScene
+@export var sound:AudioStreamPlayer3D
 
 @export var emitter_timer:Timer
 
@@ -25,3 +26,6 @@ func _on_bullet_time():
 	instance.set("angular_velocity", Vector3.ZERO)
 	
 	get_tree().root.add_child(instance)
+	
+	if sound:
+		sound.play()

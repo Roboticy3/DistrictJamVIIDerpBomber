@@ -4,14 +4,20 @@
 [ext_resource type="ArrayMesh" uid="uid://c3cm623hd14ii" path="res://models/Cube.obj" id="1_jbd7x"]
 [ext_resource type="Script" uid="uid://bespi00oasmp3" path="res://scripts/aggro.gd" id="1_n65sj"]
 [ext_resource type="Script" uid="uid://c7nsa2tsbnx6i" path="res://scripts/character_rigid_body.gd" id="2_n65sj"]
+[ext_resource type="PackedScene" uid="uid://b7gul0cwr224p" path="res://entities/cube_death_bomb.tscn" id="3_1q2jv"]
 [ext_resource type="Script" uid="uid://hych71pkip85" path="res://scripts/player_bullet_emitter.gd" id="5_dmbnc"]
 [ext_resource type="PackedScene" uid="uid://dv3suknc17ibv" path="res://entities/cube_bullet.tscn" id="6_thq88"]
+[ext_resource type="AudioStream" uid="uid://cgxhb4jd18ovm" path="res://music/clash.wav" id="7_53d4l"]
+[ext_resource type="AudioStream" uid="uid://2enxvag53v20" path="res://music/enemy_hit.wav" id="8_x74cx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3271"]
 albedo_color = Color(0.74, 1, 0.61, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jbd7x"]
 radius = 0.6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_53d4l"]
+radius = 0.6348018
 
 [sub_resource type="Animation" id="Animation_53d4l"]
 length = 0.001
@@ -56,7 +62,7 @@ _data = {
 
 [node name="Health" parent="." unique_id=93474449 instance=ExtResource("1_ftslj")]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=2113078487 node_paths=PackedStringArray("health") groups=["critter"]]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=2113078487 node_paths=PackedStringArray("health", "damage_sound") groups=["critter"]]
 collision_layer = 2
 collision_mask = 7
 gravity_scale = 0.2
@@ -64,6 +70,8 @@ linear_damp = 5.0
 angular_damp = 10.0
 script = ExtResource("2_n65sj")
 health = NodePath("../Health")
+damage_sound = NodePath("Damage")
+death_explosion = ExtResource("3_1q2jv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1863183518]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -101,7 +109,28 @@ distance_fade_enabled = true
 distance_fade_begin = 20.0
 distance_fade_shadow = 20.0
 
+[node name="Clash" type="AudioStreamPlayer3D" parent="RigidBody3D" unique_id=265911808]
+stream = ExtResource("7_53d4l")
+volume_db = 30.524
+unit_size = 7.6
+pitch_scale = 0.62
+max_distance = 5.0
+bus = &"Sfx"
+
+[node name="Area3D" type="Area3D" parent="RigidBody3D" unique_id=613129867]
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Area3D" unique_id=294829298]
+shape = SubResource("SphereShape3D_53d4l")
+
+[node name="Damage" type="AudioStreamPlayer3D" parent="RigidBody3D" unique_id=1264137556]
+stream = ExtResource("8_x74cx")
+bus = &"Sfx"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1823939081]
 libraries/ = SubResource("AnimationLibrary_53d4l")
 autoplay = &"anger"
 speed_scale = 0.0
+
+[connection signal="body_entered" from="RigidBody3D" to="RigidBody3D/Clash" method="play" unbinds=1]
+[connection signal="body_entered" from="RigidBody3D/Area3D" to="RigidBody3D/Clash" method="play" unbinds=1]
