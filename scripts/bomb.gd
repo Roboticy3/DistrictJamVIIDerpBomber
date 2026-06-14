@@ -24,4 +24,5 @@ func explode():
 	instance.set("damage", base_damage)
 	instance.set("collision_mask", explosion_mask)
 	get_tree().root.add_child(instance)
-	body.queue_free()
+	if is_instance_valid(body):
+		body.queue_free()

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dx5ec0wcprkb1"]
+
+[ext_resource type="PackedScene" uid="uid://cjyxv5b6woyd2" path="res://entities/explosion.tscn" id="1_ws8bm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ws8bm"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 0.51666665, 0, 0.5176471)
+
+[node name="Explosion" unique_id=721047995 instance=ExtResource("1_ws8bm")]
+force = 3000.0
+
+[node name="MeshInstance3D" parent="Area3D" parent_id_path=PackedInt32Array(1045562805) index="2" unique_id=1417976396]
+surface_material_override/0 = SubResource("StandardMaterial3D_ws8bm")
+
+[node name="Timer" parent="." index="1" unique_id=2005356644]
+wait_time = 3.0

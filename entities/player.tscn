@@ -10,27 +10,13 @@
 [ext_resource type="Script" uid="uid://dvdthdt52jfti" path="res://scripts/gun.gd" id="6_2hs0m"]
 [ext_resource type="ArrayMesh" uid="uid://boan6blw211pc" path="res://models/Bomb.obj" id="8_ef06p"]
 [ext_resource type="Material" uid="uid://doe20frnchgyq" path="res://materials/bomb.tres" id="9_tjdhl"]
+[ext_resource type="PackedScene" uid="uid://c4wxl1r27oann" path="res://entities/player_bomb.tscn" id="10_dchgp"]
 [ext_resource type="Script" uid="uid://buyuuxgf4orqx" path="res://scripts/player_bomb_aimer.gd" id="10_x08pd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
 bounce = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
-
-[sub_resource type="PackedScene" id="PackedScene_x08pd"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("PlayerBomb", "Node3D", "MeshInstance3D", "transform", "mesh"),
-"node_count": 2,
-"node_ids": PackedInt32Array(2142910156, 613769322),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 0, 0, 2, 2, -1, 2, 3, 0, 4, 1, 0),
-"variants": [Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0), ExtResource("8_ef06p")],
-"version": 3
-}
 
 [node name="Player" type="Node3D" unique_id=1473064690 node_paths=PackedStringArray("sensor", "body", "garbage", "gun")]
 script = ExtResource("1_4flbx")
@@ -99,25 +85,50 @@ transform = Transform3D(-4.829627, -1.2940944, -7.5497843e-07, -1.2940944, 4.829
 
 [node name="Bomb" type="Node3D" parent="Body/Arsenal" unique_id=788458912 node_paths=PackedStringArray("emitters")]
 script = ExtResource("6_2hs0m")
-emitters = [NodePath("MeshInstance3D/PlayerBulletEmitter")]
+emitters = [NodePath("PlayerBulletEmitter")]
 full_auto = false
 
+[node name="PlayerBulletEmitter" parent="Body/Arsenal/Bomb" unique_id=1633246353 instance=ExtResource("4_hqtel")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26199597, -1.0306596)
+speed = 1.0
+direction = Vector3(0, -1, 0)
+bullet = ExtResource("10_dchgp")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body/Arsenal/Bomb" unique_id=1017879171]
-transform = Transform3D(-1.7484556e-08, 0.4, 0, -0.4, -1.7484556e-08, 0, 0, 0, 0.4, 0, -0.26199597, -1.0306596)
+transform = Transform3D(-0.045008726, 0.077957384, 0.04355296, -0.08660254, -0.05000001, 0, 0.021776482, -0.03771797, 0.09001743, -0.07403365, -0.3614462, -0.8858369)
 material_override = ExtResource("9_tjdhl")
 mesh = ExtResource("8_ef06p")
 
-[node name="PlayerBulletEmitter" parent="Body/Arsenal/Bomb/MeshInstance3D" unique_id=1633246353 instance=ExtResource("4_hqtel")]
-process_mode = 4
-transform = Transform3D(-1.0927847e-07, -2.5, 0, 2.5, -1.0927847e-07, 0, 0, 0, 2.5, 0, 0, 0)
-speed = 1.0
-direction = Vector3(0, -1, 0)
-bullet = SubResource("PackedScene_x08pd")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Body/Arsenal/Bomb" unique_id=917648903]
+transform = Transform3D(0.037559755, 0.08836641, 0.027939944, -0.081159025, 0.045917444, -0.036122, -0.044749036, -0.009108437, 0.08896379, -0.23655817, -0.16404986, -0.8913171)
+material_override = ExtResource("9_tjdhl")
+mesh = ExtResource("8_ef06p")
 
-[node name="Node3D" type="Node3D" parent="Body/Arsenal/Bomb" unique_id=242431210 node_paths=PackedStringArray("body", "emitter")]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Body/Arsenal/Bomb" unique_id=1212528490]
+transform = Transform3D(-0.017474264, 0.0925132, 0.033703964, -0.06436358, -0.036637098, 0.06719414, 0.07451161, -0.009951387, 0.06594686, 0.0040031374, -0.16404986, -0.80189246)
+material_override = ExtResource("9_tjdhl")
+mesh = ExtResource("8_ef06p")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Body/Arsenal/Bomb" unique_id=182212700]
+transform = Transform3D(-0.058252737, -0.0064369524, -0.0810258, -0.060970236, -0.062462483, 0.048796188, -0.053751722, 0.07782674, 0.03246149, 0.08026087, -0.33742467, -0.80189246)
+material_override = ExtResource("9_tjdhl")
+mesh = ExtResource("8_ef06p")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Body/Arsenal/Bomb" unique_id=730475811]
+transform = Transform3D(-0.09140761, -0.04021119, 0.0052640084, 0.0342116, -0.083429106, -0.043233678, 0.02177648, -0.03771796, 0.09001742, 0.20156592, -0.16709551, -0.80189246)
+material_override = ExtResource("9_tjdhl")
+mesh = ExtResource("8_ef06p")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Body/Arsenal/Bomb" unique_id=1880959356]
+transform = Transform3D(-0.04500873, 0.077957384, 0.04355296, -0.06002122, 0.009701999, -0.07939347, -0.06611858, -0.06187501, 0.042424224, -0.18444538, -0.1670954, -0.6927686)
+material_override = ExtResource("9_tjdhl")
+mesh = ExtResource("8_ef06p")
+
+[node name="BombAim" type="Node3D" parent="Body/Arsenal/Bomb" unique_id=242431210 node_paths=PackedStringArray("body", "emitter")]
 script = ExtResource("10_x08pd")
 body = NodePath("../../..")
-emitter = NodePath("../MeshInstance3D/PlayerBulletEmitter")
+emitter = NodePath("../PlayerBulletEmitter")
 
 [node name="HudMain" parent="." unique_id=2045119173 instance=ExtResource("5_sweqy")]
 

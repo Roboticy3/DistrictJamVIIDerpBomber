@@ -5,7 +5,7 @@ extends Node
 
 @export var damage := 1.0
 @export var radius := 1.0
-@export var force := 100.0
+@export var force := 200.0
 @export_flags_3d_physics var collision_mask:int
 
 @export var timer:Timer
@@ -45,8 +45,9 @@ func _physics_process(_delta: float) -> void:
 		health.value -= damage
 		
 		if b is RigidBody3D:
-			var d := area.global_position.direction_to(b.global_position)
-			b.apply_central_force(d * force)
+			var distance2 := area.global_position.distance_squared_to(b.global_position)
+			var direction := area.global_position.direction_to(b.global_position)
+			b.apply_central_force(direction * force / distance2)
 		print("explosion ", self, " hit ", b, " for ", damage, " points (remaining: ", health.value, ")")
 		afflicted_targets[b] = true
 		pass

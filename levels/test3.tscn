@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bacxaw7ianuk1"]
+
+[ext_resource type="PackedScene" uid="uid://xrc30ay25lci" path="res://levels/test.tscn" id="1_3m663"]
+
+[node name="Node3D" unique_id=848539132 instance=ExtResource("1_3m663")]
+
+[node name="Cube" parent="." index="4" unique_id=2062048153]
+process_mode = 4
+
+[node name="Cube2" parent="." index="5" unique_id=569489717]
+process_mode = 4
+
+[node name="Cube3" parent="." index="10" unique_id=828836320]
+process_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="." index="12" unique_id=1411956685]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.956121, 0, 0)
+current = true

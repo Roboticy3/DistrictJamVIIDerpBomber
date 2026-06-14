@@ -2,19 +2,23 @@
 
 [ext_resource type="ArrayMesh" uid="uid://boan6blw211pc" path="res://models/Bomb.obj" id="1_levpq"]
 [ext_resource type="PackedScene" uid="uid://c66wismulc6no" path="res://entities/bomb.tscn" id="2_sotyd"]
-[ext_resource type="PackedScene" uid="uid://cjyxv5b6woyd2" path="res://entities/explosion.tscn" id="3_3mux7"]
+[ext_resource type="PackedScene" uid="uid://dx5ec0wcprkb1" path="res://entities/big_explosion.tscn" id="3_3mux7"]
+[ext_resource type="Script" uid="uid://b5salr4iibsg" path="res://scripts/look_at_process_2.gd" id="4_3mux7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_levpq"]
 albedo_color = Color(0.24, 0.24, 0.24, 0.53333336)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ly0j1"]
-radius = 2.0
+radius = 1.0
 
 [node name="PlayerBomb" type="RigidBody3D" unique_id=1291548106]
+collision_layer = 8
 collision_mask = 5
+mass = 2.0
+gravity_scale = 0.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=613769322]
-transform = Transform3D(-8.742278e-09, 0.2, -8.742278e-09, 0, -8.742278e-09, -0.2, -0.2, -8.742278e-09, 3.821371e-16, 0, 0, 0)
+transform = Transform3D(-8.742278e-09, -0.2, 8.742278e-09, 4.2351648e-23, -8.742278e-09, -0.2, 0.2, -8.742278e-09, 3.8213725e-16, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_levpq")
 mesh = ExtResource("1_levpq")
 
@@ -28,10 +32,30 @@ one_shot = true
 autostart = true
 
 [node name="Bomb" parent="." unique_id=92178738 node_paths=PackedStringArray("body") groups=["critter_bomb"] instance=ExtResource("2_sotyd")]
-collision_mask = 32
+collision_layer = 8
+collision_mask = 19
 base_damage = 50.0
 base_radius = 4.0
-explosion_mask = 22
+explosion_mask = 31
 sensitive = true
 explosion = ExtResource("3_3mux7")
-body = NodePath("")
+body = NodePath("..")
+
+[node name="Bomb2" parent="." unique_id=1885649103 node_paths=PackedStringArray("body") groups=["critter_bomb"] instance=ExtResource("2_sotyd")]
+collision_layer = 8
+collision_mask = 19
+base_damage = 0.0
+base_radius = 7.0
+explosion_mask = 32
+sensitive = true
+explosion = ExtResource("3_3mux7")
+body = NodePath("..")
+
+[node name="LookAtProcess2" type="Node" parent="." unique_id=415113679 node_paths=PackedStringArray("body")]
+script = ExtResource("4_3mux7")
+body = NodePath("..")
+
+[connection signal="timeout" from="Timer" to="Bomb" method="explode"]
+
+[editable path="Bomb"]
+[editable path="Bomb2"]
