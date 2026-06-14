@@ -10,8 +10,9 @@ func _ready():
 func collect(to):
 	body.queue_free()
 	var tag_set = to.get("collectibles")
-	if tag_set is Array:
+	if tag_set is PackedStringArray:
 		tag_set.push_back(tag)
+		print("found item ", tag, " total: ", to.get("collectibles"))
 	var visual = to.get("collectibles_visual")
 	if visual is Node3D:
 		model.transform = Transform3D()

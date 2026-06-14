@@ -13,6 +13,7 @@ func _ready() -> void:
 func _on_body_entered(body):
 	var collectibles = body.get("collectibles")
 	if collectibles is PackedStringArray:
+		print("checking lock with collectibles ", collectibles)
 		if collectibles.find(item_needed) != -1:
 			unlocked.emit()
 			queue_free()

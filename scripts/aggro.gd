@@ -40,7 +40,8 @@ func _on_process_aggro() -> void:
 				continue
 			
 			if p != current_target:
-				print(self, " aquiring target ", p)
+				#print(self, " aquiring target ", p)
+				pass
 			current_target = p
 			target_found = true
 			break

@@ -27,6 +27,7 @@ critter_bullet=""
 critter_bomb=""
 player_body=""
 critter=""
+player_sensor=""
 
 [gui]
 

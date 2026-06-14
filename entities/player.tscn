@@ -26,9 +26,16 @@ bounce = 1.0
 script = ExtResource("1_4flbx")
 sensor = NodePath("Body/RayCast3D")
 body = NodePath("Body")
-acceleration = 10.0
+sensor_terrain_distance = null
+speed_neutral = null
+speed_reverse = null
+speed_forward = null
+acceleration = null
+terminal_velocity = null
+current_up = null
 garbage = NodePath(".")
 gun = NodePath("Body/Arsenal/Gun")
+body_group = null
 
 [node name="Body" type="RigidBody3D" parent="." unique_id=1893002538 node_paths=PackedStringArray("health", "ammos", "enemy_room_detector", "enemies_remaining_label", "enemies_total_label", "collectibles_visual") groups=["player_body"]]
 collision_layer = 32
@@ -52,7 +59,7 @@ fov = 90.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body" unique_id=37346248]
 shape = SubResource("SphereShape3D_sh265")
 
-[node name="RayCast3D" type="RayCast3D" parent="Body" unique_id=454953933]
+[node name="RayCast3D" type="RayCast3D" parent="Body" unique_id=454953933 groups=["player_sensor"]]
 target_position = Vector3(0, 0, -100)
 
 [node name="Model" type="Node3D" parent="Body" unique_id=2070676603]

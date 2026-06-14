@@ -6,8 +6,8 @@ extends Node
 @export var sensor_terrain_distance := 1.5
 @export var speed_neutral := 3.0
 @export var speed_reverse := -0.5
-@export var speed_forward := 3.0
-@export var acceleration := .0
+@export var speed_forward := SettingsStore.player_speed
+@export var acceleration :=10.0
 @export var terminal_velocity := 20.0
 
 @export var current_up := Vector3.UP
