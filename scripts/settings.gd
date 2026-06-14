@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @export var mouse_sensitivity_slider:Range
+@export var affect_mouse_mode := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +16,7 @@ func open() -> void:
 	print("opening settings")
 	visible = true
 	
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if affect_mouse_mode: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Engine.time_scale = 0.0
 
 func close() -> void:
@@ -25,7 +26,7 @@ func close() -> void:
 	tween.tween_property(Engine, "time_scale", 1.0, 1.0)
 	
 	visible = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if affect_mouse_mode: Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event:InputEvent):
 	if event.is_action_pressed("ui_cancel") and event.is_pressed():

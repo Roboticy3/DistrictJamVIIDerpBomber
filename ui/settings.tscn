@@ -56,3 +56,10 @@ min_value = 1.0
 max_value = 10.0
 step = 0.1
 value = 1.0
+
+[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/Panel/VBoxContainer" unique_id=558462636]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Close Settings"
+
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/Panel/VBoxContainer/Button" to="." method="close"]

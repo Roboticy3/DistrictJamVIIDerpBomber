@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://2rctau0hlryu"]
+
+[ext_resource type="PackedScene" uid="uid://bodctplr1x81w" path="res://entities/sliding_background.tscn" id="1_p8ri8"]
+[ext_resource type="Texture2D" uid="uid://d3qwyoh1pda6a" path="res://models/ezgif-3748dac5e0981339.png" id="2_wk0pr"]
+[ext_resource type="Script" uid="uid://cqelhnx4s6hx5" path="res://scripts/level_loader.gd" id="3_8uxxo"]
+[ext_resource type="PackedScene" uid="uid://jhkonqnjqbpd" path="res://levels/main.tscn" id="4_ei257"]
+[ext_resource type="PackedScene" uid="uid://c3nafek2fir4g" path="res://ui/loading.tscn" id="5_p8ri8"]
+[ext_resource type="PackedScene" uid="uid://c0wgpjwwyf6a2" path="res://ui/settings.tscn" id="6_ei257"]
+[ext_resource type="Script" uid="uid://iusvh1qlrr8f" path="res://scripts/end_game.gd" id="7_p8ri8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ettg"]
+atlas = ExtResource("2_wk0pr")
+region = Rect2(0, 0, 1248, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duh7t"]
+atlas = ExtResource("2_wk0pr")
+region = Rect2(1248, 0, 1248, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ymyu"]
+atlas = ExtResource("2_wk0pr")
+region = Rect2(2496, 0, 1248, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rktv"]
+atlas = ExtResource("2_wk0pr")
+region = Rect2(3744, 0, 1248, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ye4h"]
+atlas = ExtResource("2_wk0pr")
+region = Rect2(4992, 0, 1248, 188)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwbki"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ettg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duh7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ymyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rktv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ye4h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="MainMenu" type="Node3D" unique_id=1628995025]
+
+[node name="SlidingBackground" parent="." unique_id=742358153 instance=ExtResource("1_p8ri8")]
+
+[node name="Control" type="Control" parent="." unique_id=92160709]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1587839942]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer" unique_id=798253305]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer2" unique_id=1101546534]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control/MarginContainer/MarginContainer2/VBoxContainer" unique_id=651751286]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="Control/MarginContainer/MarginContainer2/VBoxContainer/Control" unique_id=1507634512]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/MarginContainer/MarginContainer2/VBoxContainer/Control/Control" unique_id=147005966]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_nwbki")
+autoplay = "default"
+frame_progress = 0.18602948
+
+[node name="Control2" type="Control" parent="Control/MarginContainer/MarginContainer2/VBoxContainer" unique_id=1114436031]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2" unique_id=789423459]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40300003
+anchor_right = 0.597
+anchor_bottom = 1.0
+offset_left = 0.10397339
+offset_right = -0.104003906
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2/VBoxContainer" unique_id=449727099]
+layout_mode = 2
+text = "Play"
+
+[node name="Button3" type="Button" parent="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2/VBoxContainer" unique_id=1796474913]
+layout_mode = 2
+text = "Settings"
+
+[node name="Button2" type="Button" parent="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2/VBoxContainer" unique_id=36703925]
+layout_mode = 2
+text = "Quit"
+
+[node name="Loader" type="Node" parent="." unique_id=1526653920]
+script = ExtResource("3_8uxxo")
+level = ExtResource("4_ei257")
+load_scene = ExtResource("5_p8ri8")
+preload_level = false
+
+[node name="Settings" parent="." unique_id=1247447749 instance=ExtResource("6_ei257")]
+affect_mouse_mode = false
+
+[node name="EndGame" type="Node" parent="." unique_id=594025815]
+script = ExtResource("7_p8ri8")
+
+[connection signal="pressed" from="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2/VBoxContainer/Button" to="Loader" method="mount_level"]
+[connection signal="pressed" from="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2/VBoxContainer/Button3" to="Settings" method="open"]
+[connection signal="pressed" from="Control/MarginContainer/MarginContainer2/VBoxContainer/Control2/VBoxContainer/Button2" to="EndGame" method="quit"]

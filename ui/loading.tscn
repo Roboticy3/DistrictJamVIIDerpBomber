@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://c3nafek2fir4g"]
+
+[ext_resource type="ArrayMesh" uid="uid://dt0iccsg5bhrt" path="res://models/Bullet.obj" id="1_5txd7"]
+[ext_resource type="PackedScene" uid="uid://bodctplr1x81w" path="res://entities/sliding_background.tscn" id="1_og8k8"]
+[ext_resource type="Script" uid="uid://d0ysp3ugpgt08" path="res://scripts/shiny.gd" id="3_uku2u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_og8k8"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_uku2u"]
+sky_material = SubResource("ProceduralSkyMaterial_og8k8")
+
+[sub_resource type="Environment" id="Environment_w2lu3"]
+background_mode = 2
+sky = SubResource("Sky_uku2u")
+tonemap_mode = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_uku2u"]
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[node name="Loading" type="CanvasLayer" unique_id=1128309424]
+layer = 1023
+
+[node name="SlidingBackground" parent="." unique_id=742358153 instance=ExtResource("1_og8k8")]
+
+[node name="Control" type="MarginContainer" parent="." unique_id=60140515]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control" unique_id=287539532]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/Control" unique_id=306090663]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.54800004
+anchor_right = 0.24400002
+anchor_bottom = 1.0
+offset_top = -0.22402954
+offset_right = -0.44802856
+grow_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Control/Control/SubViewportContainer" unique_id=1919633695]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(266, 266)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Control/Control/SubViewportContainer/SubViewport" unique_id=1931211911]
+environment = SubResource("Environment_w2lu3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Control/Control/SubViewportContainer/SubViewport" unique_id=511823823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.892127)
+mesh = ExtResource("1_5txd7")
+script = ExtResource("3_uku2u")
+position_amplitude = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="Control/Control/SubViewportContainer/SubViewport" unique_id=1017349018]
+
+[node name="Label" type="Label" parent="Control/Control" unique_id=1194122378]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.76900005
+anchor_top = 0.827
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.25195313
+offset_top = -0.27600098
+grow_horizontal = 0
+grow_vertical = 0
+text = "Loading..."
+label_settings = SubResource("LabelSettings_uku2u")

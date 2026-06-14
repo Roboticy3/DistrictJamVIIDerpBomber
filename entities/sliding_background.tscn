@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bodctplr1x81w"]
+
+[ext_resource type="Texture2D" uid="uid://dwxmvaj54ghc2" path="res://materials/tile.png" id="1_4tj4d"]
+
+[sub_resource type="Animation" id="Animation_4tj4d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7wqgc"]
+resource_name = "slide"
+length = 3.0
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.10363768, -0.050196584]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xo3ym"]
+_data = {
+&"RESET": SubResource("Animation_4tj4d"),
+&"slide": SubResource("Animation_7wqgc")
+}
+
+[node name="SlidingBackground" type="Node2D" unique_id=742358153]
+
+[node name="TextureRect" type="Sprite2D" parent="." unique_id=1448662552]
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(10, 10)
+texture = ExtResource("1_4tj4d")
+region_enabled = true
+region_rect = Rect2(-294.19995, -283.4, 2374.1663, 1760.9808)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2113383154]
+libraries/ = SubResource("AnimationLibrary_xo3ym")
+autoplay = &"slide"
+speed_scale = 0.5
