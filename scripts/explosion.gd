@@ -48,6 +48,6 @@ func _physics_process(_delta: float) -> void:
 			var distance2 := area.global_position.distance_squared_to(b.global_position)
 			var direction := area.global_position.direction_to(b.global_position)
 			b.apply_central_force(direction * force / distance2)
-		print("explosion ", self, " hit ", b, " for ", damage, " points (remaining: ", health.value, ")")
+		#print("explosion ", self, " hit ", b, " for ", damage, " points (remaining: ", health.value, ")")
 		afflicted_targets[b] = true
 		pass

@@ -15,7 +15,8 @@ radius = 1.0
 collision_layer = 8
 collision_mask = 5
 mass = 2.0
-gravity_scale = 0.2
+gravity_scale = 0.5
+linear_damp = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=613769322]
 transform = Transform3D(-8.742278e-09, -0.2, 8.742278e-09, 4.2351648e-23, -8.742278e-09, -0.2, 0.2, -8.742278e-09, 3.8213725e-16, 0, 0, 0)
@@ -36,7 +37,7 @@ collision_layer = 8
 collision_mask = 19
 base_damage = 50.0
 base_radius = 4.0
-explosion_mask = 31
+explosion_mask = 3
 sensitive = true
 explosion = ExtResource("3_3mux7")
 body = NodePath("..")
@@ -44,9 +45,9 @@ body = NodePath("..")
 [node name="Bomb2" parent="." unique_id=1885649103 node_paths=PackedStringArray("body") groups=["critter_bomb"] instance=ExtResource("2_sotyd")]
 collision_layer = 8
 collision_mask = 19
-base_damage = 0.0
-base_radius = 7.0
-explosion_mask = 32
+base_damage = 20.0
+base_radius = 5.0
+explosion_mask = 36
 sensitive = true
 explosion = ExtResource("3_3mux7")
 body = NodePath("..")

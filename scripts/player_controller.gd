@@ -8,6 +8,7 @@ extends Node
 @export var speed_reverse := -0.5
 @export var speed_forward := 3.0
 @export var acceleration := 5.0
+@export var terminal_velocity := 20.0
 
 @export var current_up := Vector3.UP
 
@@ -63,10 +64,13 @@ func _physics_process(delta: float) -> void:
 	body.linear_velocity = next_velocity
 	
 	if Input.is_action_pressed("alt_plane"):
-		body.rotate(get_body_transform().basis.z, desired_mouse_velocity.x)
+		body.apply_torque_impulse(get_body_transform().basis.z * desired_mouse_velocity.x)
 		
 	else:
-		body.rotate(current_up, desired_mouse_velocity.x)
+		body.apply_torque_impulse(current_up * desired_mouse_velocity.x)
 	current_up = get_body_transform().basis.y
-	body.rotate(get_body_transform().basis.x, desired_mouse_velocity.y)
+	body.apply_torque_impulse(get_body_transform().basis.x * desired_mouse_velocity.y)
 	desired_mouse_velocity *= 0.2
+	
+	if body.linear_velocity.length() >= terminal_velocity:
+		body.linear_velocity = body.linear_velocity.limit_length(terminal_velocity)

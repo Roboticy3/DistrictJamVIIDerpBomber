@@ -1,3 +1,3 @@
 extends Node
 
-@export var mouse_sensitivity := 0.001
+@export var mouse_sensitivity := 0.003

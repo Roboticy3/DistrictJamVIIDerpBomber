@@ -1,6 +1,7 @@
 extends Node
 
 @export var ammo_depletion_rate := 10
+@export var ammo_cost := 1
 @export var ammo_bank:Range
 @export var emitters:Array[Node]
 
@@ -21,12 +22,15 @@ func _process(delta: float) -> void:
 	if should_fire and has_ammo:
 		if full_auto:
 			firing = true
+			if is_instance_valid(ammo_bank):
+				ammo_bank.value -= ammo_depletion_rate * delta
 		else:
 			for e in emitters:
 				if is_instance_valid(e):
 					e.call("_on_bullet_time")
-		if is_instance_valid(ammo_bank):
-			ammo_bank.value -= ammo_depletion_rate * delta
+			if is_instance_valid(ammo_bank):
+				ammo_bank.value -= ammo_cost
+		
 	elif full_auto:
 		firing = false
 		

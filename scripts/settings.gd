@@ -35,4 +35,4 @@ func _input(event:InputEvent):
 			open()
 
 func _on_sensitivity_slider_changed(new_value:float):
-	SettingsStore.mouse_sensitivity = new_value * 0.0005
+	SettingsStore.mouse_sensitivity = new_value * 0.0015
